@@ -20,6 +20,9 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false
       }
     });
+    Match.hasMany(models.Team, {
+      onDelete: "cascade"
+    });
   };
 
   return Match;
