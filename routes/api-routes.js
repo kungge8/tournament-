@@ -28,25 +28,25 @@ module.exports = function (app) {
 
 	app.post("api/new/team", function(req,res){
 
-		db.Post.update({
+		db.teams.create({
 	      where: {
 	        team: req.params.team
 	      }
 	    })
-	    .then(function(dbPost) {
-	      res.json(dbPost);
+	    .then(function(dbTeams) {
+	      res.json(dbTeams);
 	    });
 	});
 
 	app.post("api/new/tournment", function(res,req){
 
-		db.Post.update({
+		db.teams.create({
 	      where: {
 	        tournment: req.params.tournment
 	      }
 	    })
-	    .then(function(dbPost) {
-	      res.json(dbPost);
+	    .then(function(dbTournment) {
+	      res.json(dbTournment);
 	    });
 
 	});
