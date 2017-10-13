@@ -25,12 +25,13 @@ module.exports = function (app) {
 
 	});
 
-
+//we need to make sure that the bodyparser variable names are correct
 	app.post("api/new/team", function(req,res){
 
 		db.teams.create({
 	      where: {
-	        team: req.params.team
+	        team_name: req.params.teamName,
+	        team_text: req.params.text
 	      }
 	    })
 	    .then(function(dbTeams) {
@@ -42,7 +43,8 @@ module.exports = function (app) {
 
 		db.teams.create({
 	      where: {
-	        tournment: req.params.tournment
+	        tournment_name: req.params.tournment,
+	        tournment_text: req.params.text
 	      }
 	    })
 	    .then(function(dbTournment) {

@@ -6,6 +6,7 @@ create table tournaments(
 
     tournament_id integer(5) not null auto_increment,
     tournament_name varchar(20) not null,
+    tournment_text varchar(240),
     primary key(tournament_id)
 
 );
@@ -34,6 +35,7 @@ create table teams(
 
     team_id integer(5) not null auto_increment,
     team_name varchar(20) not null,
+    team_text varchar(240),
     tournament_id integer(5) not null,
     match_id integer(5) not null,
     foreign key(tournament_id) references tournaments(tournament_id),
