@@ -1,10 +1,7 @@
 module.exports = function(sequelize, DataTypes){
-	var Team = sequelize.define("Team", {
-		name:{
-			type: DataTypes.STRING
-		},
-		teamInfo:{
-			type: DataTypes.STRING
+	var TeamRecord = sequelize.define("TeamRecord", {
+		tournament_id:{
+			type: DataTypes.INTEGER
 		},
 		'createdAt': {
       type: DataTypes.DATE(3),
@@ -16,10 +13,9 @@ module.exports = function(sequelize, DataTypes){
     }
 	});
 
-	Team.associate = function(models){
-		Team.belongsToMany(models.Tournament, {through: models.TeamRecord});
-		Team.belongsToMany(models.Match, {through: models.TeamRecord});
+	TeamRecord.associate = function(models){
+		
 	}
-	
-	return Team;
+
+	return TeamRecord;
 }
