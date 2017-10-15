@@ -2,26 +2,47 @@ var db = require("../models");
 
 module.exports = function (app) {
 
-	app.get("/api/all", function(req,res){
-		db.Post.findAll({})
-	    .then(function(dbPost) {
-	      res.json(dbPost);
-	    });
-	});
 
+	app.get("api/search/:field?/:term?", function(req,res){
 
-	app.get("api/search/:tournment?/:match?/:team?", function(req,res){
+		if (field === "tournment"){
 
-	    db.Post.findAll({
-	      where: {
-	        tournment: req.params.tournment,
-	        match: req.params.match,
-	        team: req.params.team,
-	      }
-	    })
-	    .then(function(dbPost) {
-	      res.json(dbPost);
-	    });
+			db.Post.findAll({
+		      where: {
+		        field: req.params.field,
+		        term: req.params.term,
+		      }
+			})
+		    .then(function(dbSearch) {
+		      res.json(dbSearch);
+		    });
+
+		} else if (field === "match"){
+
+			db.Post.findAll({
+		      where: {
+		        field: req.params.field,
+		        term: req.params.term,
+		      }
+			})
+		    .then(function(dbSearch) {
+		      res.json(dbSearch);
+		    });
+
+		} else if (field === "team") {
+
+			db.Post.findAll({
+		      where: {
+		        field: req.params.field,
+		        term: req.params.term,
+		      }
+			})
+		    .then(function(dbSearch) {
+		      res.json(dbPost);
+		    });
+		} else {
+			console.log ("please specify a search term");
+		};
 
 	});
 
