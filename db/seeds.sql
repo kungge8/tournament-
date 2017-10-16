@@ -24,23 +24,6 @@ Values ("test", "testInfo", 2);
 
 select * from tournaments;
 
-select * from rounds;
-
 select * from matches;
 
 select * from teams;
-
-select * from tournaments
-LEFT JOIN rounds on rounds.TournamentId
-LEFT JOIN matches on matches.RoundId
-LEFT JOIN teams on teams.MatchId;
-
-select tournaments.id, 
-tournaments.name as TournamentName,
-matches.RoundId as Round,
-matches.id as MatchID,
-teams.id as TeamID from tournaments
-LEFT JOIN rounds on rounds.TournamentId
-LEFT JOIN matches on matches.RoundId
-LEFT JOIN teams on teams.MatchId
-WHERE tournaments.id = 1;
