@@ -51,8 +51,8 @@ module.exports = function (app) {
 
 		db.teams.create({
 	      where: {
-	        team_name: req.params.teamName,
-	        team_text: req.params.text
+	        name: req.params.teamName,
+	        teamInfo: req.params.text
 	      }
 	    })
 	    .then(function(dbTeams) {
@@ -64,8 +64,8 @@ module.exports = function (app) {
 
 		db.teams.create({
 	      where: {
-	        tournment_name: req.params.tournment,
-	        tournment_text: req.params.text
+	       	name: req.params.tournment,
+	        info: req.params.text
 	      }
 	    })
 	    .then(function(dbTournment) {
