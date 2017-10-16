@@ -1,10 +1,6 @@
 module.exports = function(sequelize, DataTypes){
 	var Match = sequelize.define("Match", {
-		// round_id: DataTypes.INTEGER,
-		team1_id: {
-			type: DataTypes.INTEGER
-		},
-		team2_id: {
+		roundNumber:{
 			type: DataTypes.INTEGER
 		},
 		tournament_id: {
@@ -21,9 +17,7 @@ module.exports = function(sequelize, DataTypes){
 	});
 
 	Match.associate = function(models){
-		Match.belongsTo(models.Round, {
-			onDelete: "CASCADE"
-		});
+		Match.belongsTo(models.Tournament);
 		Match.hasMany(models.Team);
 	}
 

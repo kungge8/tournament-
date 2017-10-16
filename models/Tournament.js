@@ -17,11 +17,13 @@ module.exports = function(sequelize, DataTypes){
 	});
 
 	Tournament.associate = function(models){
-		Tournament.hasMany(models.Round, {
-			foreign_key: {
-				allowNull: false
-			}
-		});
+		Tournament.hasMany(models.Match);
+		// Tournament.hasMany(models.Round, {
+		// 	foreign_key: {
+		// 		allowNull: false
+		// 	}
+		// });
+		// Tournament.belongsTo(models.Team);
 		// Tournament.hasMany(models.Match);
 		// Tournament.hasMany(models.Team);
 	}

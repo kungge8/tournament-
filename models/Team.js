@@ -1,10 +1,10 @@
 module.exports = function(sequelize, DataTypes){
 	var Team = sequelize.define("Team", {
 		name:{
-			type: DataTypes.STRING
+			type: DataTypes.STRING,
 		},
 		teamInfo:{
-			type: DataTypes.STRING
+			type: DataTypes.STRING,
 		},
 		'createdAt': {
       type: DataTypes.DATE(3),
@@ -17,8 +17,19 @@ module.exports = function(sequelize, DataTypes){
 	});
 
 	Team.associate = function(models){
-		Team.belongsToMany(models.Tournament, {through: models.TeamRecord});
-		Team.belongsToMany(models.Match, {through: models.TeamRecord});
+		Team.belongsToMany(models.Match, {
+			through: "TeamRecord",
+			foreignKey: {
+				allowNull: false
+			},
+			as: "Teams"
+		});
+		// Team.belongsToMany(models.Tournament, {through: "TeamRecord"});
+		// Team.belongsToMany(models.Match, {through: "TeamRecord"});
+		// Team.hasMany(models.Match, {through: "TeamRecord"});
+		// Team.hasMany(models.Tournament, {through: "TeamRecord"});
+		// Team.hasMany(models.Match);
+		// Team.hasMany(models.Tournament);
 	}
 	
 	return Team;

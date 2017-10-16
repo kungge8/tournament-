@@ -1,0 +1,31 @@
+{
+  "name": "tournament-",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "console.table": "^0.9.1",
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0",
+    "mysql": "^2.15.0",
+    "mysql2": "^1.4.2",
+    "sequelize": "^4.13.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kungge8/tournament-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kungge8/tournament-/issues"
+  },
+  "homepage": "https://github.com/kungge8/tournament-#readme"
+}
