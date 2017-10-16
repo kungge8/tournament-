@@ -1,32 +1,24 @@
-module.exports = function(sequelize, DataTypes) {
-  var Tournament = sequelize.define("Tournament", {
-    tournament_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
+module.exports = function(sequelize, DataTypes){
+	var Tournament = sequelize.define("Tournament", {
+		name:{
+			type: DataTypes.STRING,
+		},
+		info:{
+			type: DataTypes.STRING,
+		},
+		'createdAt': {
+      type: DataTypes.DATE(3),
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP(3)'),
     },
-    tournament_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
+    'updatedAt': {
+      type: DataTypes.DATE(3),
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)'),
     }
-  });
+	});
 
-  Tournament.associate = function(models) {
-    Tournament.hasMany(models.Team, {
-      onDelete: "cascade"
-    });
-    Tournament.hasMany(models.Round, {
-      onDelete: "cascade"
-    });
-    Tournament.hasMany(models.Match, {
-      onDelete: "cascade"
-    });
-  };
-
-  return Tournament;
-};
+	Tournament.associate = function(models){
+		Tournament.hasMany(models.Match);
+	}
+	
+	return Tournament;
+}

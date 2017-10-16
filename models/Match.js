@@ -1,29 +1,25 @@
-module.exports = function(sequelize, DataTypes) {
-  var Match = sequelize.define("Match", {
-    match_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
+module.exports = function(sequelize, DataTypes){
+	var Match = sequelize.define("Match", {
+		roundNumber:{
+			type: DataTypes.INTEGER
+		},
+		tournament_id: {
+			type: DataTypes.INTEGER
+		},
+		'createdAt': {
+      type: DataTypes.DATE(3),
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP(3)'),
+    },
+    'updatedAt': {
+      type: DataTypes.DATE(3),
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)'),
     }
-  });
+	});
 
-  Match.associate = function(models) {
-    Match.belongsTo(models.Tournament, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-    Match.belongsTo(models.Round, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-    Match.hasMany(models.Team, {
-      onDelete: "cascade"
-    });
-  };
+	Match.associate = function(models){
+		Match.belongsTo(models.Tournament);
+		Match.hasMany(models.Team);
+	}
 
-  return Match;
-};
+	return Match;
+}
