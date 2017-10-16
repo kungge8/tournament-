@@ -21,8 +21,7 @@ module.exports = function(sequelize, DataTypes){
 			through: "TeamRecord",
 			foreignKey: {
 				allowNull: false
-			},
-			as: "Teams"
+			}
 		});
 	}
 	

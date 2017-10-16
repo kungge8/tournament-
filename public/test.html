@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Yeah IDK</title>
+
+    <style type="text/css">
+      .inputLine {
+        padding-bottom: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <span>Tournament Name </span><input type="text" id="name">
+
+    <br><br>
+    <span>Number of Teams</span>
+    <select id="teams">
+        <option value="4">4</option>
+        <option value="8">8</option>
+        <option value="16">16</option>
+        <option value="32">32</option>
+        <option value="64">64</option>
+    </select>
+
+    <br><br>
+    <div class="teamsInput"></div>
+    <button type="submit" id="submit">Submit</button>
+
+    <script type='text/javascript'>
+
+      addFields();
+
+      $("#teams").on("change", function() {
+        addFields();
+      })
+
+      $("#submit").on("click", function() {
+        teams = [];
+        number = $("#teams").val();
+
+        var empty = false;
+        for (var i = 1; i <= number; i++) {
+          if ($("#team" + i).val().trim() === "") {
+            empty = true;
+          }
+        }
+
+        if ($("#name").val().trim() === "" || empty) {
+          alert("Not Everything Filled")
+        }
+        else {
+          console.log("Tournament Name: " + $("#name").val());
+
+          for (var i = 1; i <= number; i++) {
+            teams.push($("#team" + i).val())
+            $("#team" + i).val("");
+          }
+          $("#name").val("");
+
+          seeding(number);
+        }
+      });
+
+      function addFields() {
+        var number = $("#teams").val();
+        
+        $(".teamsInput").empty();
+
+        for (var i = 1; i <= number; i++) {
+          var line = $("<div>");
+          line.attr("class", "inputLine");
+          line.append("Team " + i + " ");
+          var input = $("<input>");
+          input.attr("type", "text");
+          input.attr("id", "team" + i);
+          line.append(input);
+          $(".teamsInput").append(line);
+        }
+      }
+
+      function seeding(numPlayers){
+        var rounds = Math.log(numPlayers)/Math.log(2)-1;
+        var pls = [1,2];
+        for(var i=0; i<rounds; i++) {
+          pls = nextLayer(pls);
+        }
+
+        for(var i = 0, j = 1; i < pls.length; i+=2, j++) {
+          console.log("Match " + j + ": " + teams[(pls[i]-1)] + " vs " + teams[(pls[i+1]-1)]);
+        }
+
+        return pls;
+        function nextLayer(pls) {
+          var out=[];
+          var length = pls.length*2+1;
+          pls.forEach(function(d) {
+            out.push(d);
+            out.push(length-d);
+          });
+
+          return out;
+        }
+      }
+    </script>
+  </body>
+</html>

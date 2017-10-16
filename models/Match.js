@@ -17,7 +17,11 @@ module.exports = function(sequelize, DataTypes){
 	});
 
 	Match.associate = function(models){
-		Match.belongsTo(models.Tournament);
+		Match.belongsTo(models.Tournament, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
 		Match.hasMany(models.Team);
 	}
 
