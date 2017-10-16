@@ -74,5 +74,34 @@ module.exports = function (app) {
 
 	});
 
+	app.post("api/new/match", function(res,req){
+
+		db.teams.create({
+	      where: {
+	       	team1_id: req.params.team1,
+	       	team2_id: req.params.team2,
+	       	tournment_id: req.params.tournmentId,
+	       	round_id: req.params.roundId
+	      }
+	    })
+	    .then(function(dbTournment) {
+	      res.json(dbTournment);
+	    });
+
+	});
+
+	// 	app.post("api/new/round", function(res,req){
+
+	// 	db.teams.create({
+	//       where: {
+	//        	tournment_id: req.params.tournmentId
+	//       }
+	//     })
+	//     .then(function(dbTournment) {
+	//       res.json(dbTournment);
+	//     });
+
+	// });
+
 };
 	

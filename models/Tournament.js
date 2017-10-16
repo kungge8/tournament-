@@ -1,5 +1,5 @@
 module.exports = function (sequelize, Datatypes){
-  var tournment = sequelize.define("tournment",
+  var tournment = sequelize.define("tournment", {
     name:{
       type: Datatypes.STRING,
       allowNull: false,
