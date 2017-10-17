@@ -89,7 +89,18 @@
         }
 
         for(var i = 0, j = 1; i < pls.length; i+=2, j++) {
-          console.log("Match " + j + ": " + teams[(pls[i]-1)] + " vs " + teams[(pls[i+1]-1)]);
+          console.log("Round 1 - Match " + j + ": " + teams[(pls[i]-1)] + " vs " + teams[(pls[i+1]-1)]);
+        }
+
+        for(var i = 1, j = 1; i < pls.length/2; i+=2, j++) {
+          console.log("Round 2 - Match " + j + ": " + "Round 1 Match "+ (i) + " Winner" + " vs " + "Round 1 Match "+ (i+1) + " Winner");
+        }
+
+        for(var i = 1, j = 1; i < pls.length/4; i+=2, j++) {
+          console.log("Round 3 - Match " + j + ": " + "Round 2 Match "+ (i) + " Winner" + " vs " + "Round 2 Match "+ (i+1) + " Winner");
+        }
+        for(var i = 1, j = 1; i < pls.length/8; i+=2, j++) {
+          console.log("Round 4 - Match " + j + ": " + "Round 3 Match "+ (i) + " Winner" + " vs " + "Round 3 Match "+ (i+1) + " Winner");
         }
 
         return pls;
