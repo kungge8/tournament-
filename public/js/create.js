@@ -30,7 +30,6 @@ $("#submit").on("click", function() {
 
     $("#name").val("");
     seeding(number);
-    // controller(number, 1);
   }
 });
 
@@ -123,13 +122,13 @@ function kevin() {
   }
 }
 
-function seeding(numPlayers){
+function seeding(numPlayers) {
   var rounds = Math.log(numPlayers)/Math.log(2)-1;
   var pls = [1,2];
-  for(var i = 0; i < rounds; i++) {
+  for (var i = 0; i < rounds; i++) {
     pls = nextLayer(pls);
   }
-  for(var i = 0, j = 1; i < pls.length; i+=2, j++) {
+  for (var i = 0, j = 1; i < pls.length; i+=2, j++) {
     console.log("Match " + j + ": " + teams[(pls[i]-1)] + " vs " + teams[(pls[i+1]-1)]);
     var newMatch = {
       team1: teams[(pls[i]-1)],
@@ -142,16 +141,16 @@ function seeding(numPlayers){
   }
   for (var k = 1; pls.length/Math.pow(2,k) !== 1; k++) {
     for(var i = 1, j = 1; i < pls.length/Math.pow(2,k); i+=2, j++) {
-    console.log("Round " + (k+1) + " - Match " + j + ": " + "Round " + k + " Match "+ (i) + " Winner" + " vs " + "Round " + k + " Match "+ (i+1) + " Winner");
-    var newMatch = {
-      team1: "Round " + k + " Match " + i + " Winner",
-      team2: "Round " + k + " Match " + (i+1) + " Winner",
-      matchNum: j,
-      roundNum: (k+1),
-      tournament: tournamentName
+      console.log("Round " + (k+1) + " - Match " + j + ": " + "Round " + k + " Match "+ i + " Winner" + " vs " + "Round " + k + " Match "+ (i+1) + " Winner");
+      var newMatch = {
+        team1: "Round " + k + " Match " + i + " Winner",
+        team2: "Round " + k + " Match " + (i+1) + " Winner",
+        matchNum: j,
+        roundNum: (k+1),
+        tournament: tournamentName
+      }
+      $.post("/api/games", newMatch);
     }
-    $.post("/api/games", newMatch);
-  }
   }
   return pls;
   function nextLayer(pls) {

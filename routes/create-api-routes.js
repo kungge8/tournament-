@@ -6,4 +6,26 @@ module.exports = function(app) {
       res.json(dbGame);
     });
   });
+
+  app.put("/api/update", function (req,res) {
+  	if (req.body.matchNum % 2 === 0) {
+  		db.Game.update({
+  			team1: req.body.team
+  		},
+  		where: {
+  			tournament: req.body.tournament,
+  			roundNum: req.body.round + 1,
+  			matchNum: Math.ceil(req.body.matchNum / 2)
+  		})
+  	} else {
+  		db.Game.update({
+  			team2: req.body.team
+  		},
+  		where: {
+  			tournament: req.body.tournament,
+  			roundNum: req.body.round + 1,
+  			matchNum: Math.ceil(req.body.matchNum / 2)
+  		})
+  	}
+  });
 };
