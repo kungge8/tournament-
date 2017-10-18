@@ -13,8 +13,13 @@ $('.bracketContainer').height(windowHeight + "px");
 $('.sidebar').height(windowHeight + "px");
 $('.sidebar-inner').height(windowHeight + "px");
 
-function teamWrite(arr){
- let round1 = $('div[data-roundNum="1"]').children();
+$('#label1').text("Tournament Name");
+$('#label2').text("Tournament Description");
+$('#label3').text("Tournament Size");
+$('#tournamentSelect').html('<option>4</option><option>8</option><option>16</option><option>32</option><option>64</option>');
+
+function teamWrite(arr, roundNum){
+ let round1 = $('div[data-roundNum="' + roundNum + '"]').children();
  console.log(round1);
  arr.map(function (n, i) {
    round1.children('div[data-teamNum="' + (i + 1) + '"]').text(n);
@@ -78,7 +83,7 @@ $('.footer').on('click',function(){
 
   var divWidth = 100 / columnCount;
 
-  if( !$.trim( $('.bracketContainer').html() ).length ){
+  if( !$.trim( $('.bracketContainer').html()).length ){
     // console.log("----------------------");
     for(var i = 0; i < columnCount; i++){
       var newDiv = $('<div>');
@@ -109,7 +114,7 @@ $('.footer').on('click',function(){
           var sub = $('<div>');
           sub.height(100/subDivs + "%");
           // sub.data("matchNum", n + 1);
-          sub.attr("data-matchNum", i + 1);
+          sub.attr("data-matchNum", n + 1);
           // console.log("Assigned match num is: " + sub.data("matchNum"));
           sub.css("border","2px solid #62BBC1");
 
@@ -134,6 +139,17 @@ $('.footer').on('click',function(){
           $(newDiv).append(sub);
         }
 
+      }else if (i === columnCount - 1){
+        var sub = $('<div>');
+        sub.height(100/subDivs + "%");
+        sub.attr("data-matchNum", 1);
+        // sub.css("border","2px solid #62BBC1");
+
+        var matchSplitter = $("<div>");
+        matchSplitter.attr("data-teamNum", 1);
+
+        sub.append(matchSplitter);
+        $(newDiv).append(sub);
       }else{
         newDiv.css("border","2px solid #62BBC1");
       }
@@ -150,7 +166,8 @@ $('.footer').on('click',function(){
   }else{
     console.log("nope");
   }
-teamWrite(reseeded);
+  teamWrite(reseeded, 1);
+  upScInit();
 });
 
 //reset functionality
@@ -203,17 +220,26 @@ function seeding(numPlayers) {
   }
   for (var k = 1; pls.length/Math.pow(2,k) !== 1; k++) {
     for(var i = 1, j = 1; i < pls.length/Math.pow(2,k); i+=2, j++) {
-    console.log("Round " + (k+1) + " - Match " + j + ": " + "Round " + k + " Match "+ i + " Winner" + " vs " + "Round " + k + " Match "+ (i+1) + " Winner");
-    var newMatch = {
-      team1: "Round " + k + " Match " + i + " Winner",
-      team2: "Round " + k + " Match " + (i+1) + " Winner",
-      matchNum: j,
-      roundNum: (k+1),
-      tournament: tournamentName
+      console.log("Round " + (k+1) + " - Match " + j + ": " + "Round " + k + " Match "+ i + " Winner" + " vs " + "Round " + k + " Match "+ (i+1) + " Winner");
+      var newMatch = {
+        team1: "Round " + k + " Match " + i + " Winner",
+        team2: "Round " + k + " Match " + (i+1) + " Winner",
+        matchNum: j,
+        roundNum: (k+1),
+        tournament: tournamentName
+      }
+      $.post("/api/games", newMatch);
     }
-    $.post("/api/games", newMatch);
   }
+  var newMatch = {
+    team1: "Tournament Winner",
+    team2: "...",
+    matchNum: 1,
+    roundNum: (rounds+2),
+    tournament: tournamentName
   }
+  $.post("/api/games", newMatch);
+
   return pls;
   function nextLayer(pls) {
     var out=[];

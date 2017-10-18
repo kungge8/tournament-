@@ -32,27 +32,31 @@ module.exports = function(app) {
 
   app.put("/api/games", function(req, res) {
     if (req.body.match % 2 === 1) {
+    	console.log("team1update");
       db.Game.update({
         team1: req.body.team
       },
       {
         where: {
           tournament: req.body.tournament,
-          roundNum: parseInt(req.body.round) + 1,
+          roundNum: parseInt(req.body.round),
           matchNum: Math.ceil(req.body.match / 2)
         }
       })
     } else {
+    	console.log("team2update");
       db.Game.update({
         team2: req.body.team
       },
       {
         where: {
           tournament: req.body.tournament,
-          roundNum: parseInt(req.body.round) + 1,
+          roundNum: parseInt(req.body.round),
           matchNum: Math.ceil(req.body.match / 2)
         }
       })
     }
+
+    res.json("asdfasdfasd");
   });
 };

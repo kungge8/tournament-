@@ -29,7 +29,7 @@ app.get("/search",function(req,res){
   res.render('search',{scripts: searchScripts});
 })
 
-var createScripts = [{script: 'js/createScript.js'}];
+var createScripts = [{script: 'js/updateScript.js'}, {script: 'js/createScript.js'}];
 app.get("/create",function(req,res){
   res.render('create',{scripts: createScripts});
 })
