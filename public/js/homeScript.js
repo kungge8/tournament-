@@ -5,5 +5,5 @@ $("#searchButton").on("click",function(){
 });
 
 $("#createButton").on("click",function(){
-  window.location = "/create";
+  window.location = "/login";
 })

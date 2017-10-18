@@ -34,6 +34,13 @@ app.get("/create",function(req,res){
   res.render('create',{scripts: createScripts});
 })
 
+//*****I added this after it worked****************
+var loginScripts = [{script: 'js/loginScript.js'}];
+app.get("/login",function(req,res){
+  res.render('login',{scripts: loginScripts});
+})
+//************************************************
+
 require("./routes/api-routes.js")(app);
 // require("./routes/html-routes.js")(app);
 
