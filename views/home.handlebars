@@ -1,0 +1,26 @@
+<div class="container">
+
+
+  <div class="jumbotron animated fadeInDown">
+    <h1 class="display-3">Bracket Generator</h1>
+    <p class="lead">A simple tool that enables users to create and archive brackets for their tournaments</p>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-sm-6">
+      <button id="searchButton" class="btn animated fadeInLeft" type="button" name="button">Search</button>
+    </div>
+    <div class="col-sm-6">
+      <button id="createButton" class="btn animated fadeInRight" type="button" name="button">Create</button>
+    </div>
+  </div>
+
+
+
+</div>
+
+{{#each scripts}}
+  <script type="text/javascript" src="{{script}}"></script>
+{{/each}}
