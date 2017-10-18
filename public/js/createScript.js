@@ -4,126 +4,161 @@
 
 //make subdivs inside each round div for the matchups
 
-    var windowHeight = $(window).height();
+var windowHeight = $(window).height();
 
-    console.log(windowHeight);
+console.log(windowHeight);
 
-    $('.holder').height(windowHeight + "px");
-    $('.bracketContainer').height(windowHeight + "px");
-    $('.sidebar').height(windowHeight + "px");
-    $('.sidebar-inner').height(windowHeight + "px");
+$('.holder').height(windowHeight + "px");
+$('.bracketContainer').height(windowHeight + "px");
+$('.sidebar').height(windowHeight + "px");
+$('.sidebar-inner').height(windowHeight + "px");
 
-    $('.footer').on('click',function(){
-      $(".bracketContainer").empty();
-      var teamAmount = $('select[name="tournamentSel"]').val();
-      teamAmount = parseInt(teamAmount);
-      //switch for amount of teams
-      var columnCount = 0;
-      switch(teamAmount){
-        case 4:
-          columnCount = 3;
-          break;
-        case 8:
-          columnCount = 4;
-          break;
-        case 16:
-          columnCount = 5;
-          break;
-        case 32:
-          columnCount = 6;
-          break;
-        case 64:
-          columnCount = 7;
-          break;
-        default:
-          console.log('default');
+function teamWrite(arr){
+ let round1 = $('div[data-roundNum="1"]').children();
+ console.log(round1);
+ arr.map(function (n, i) {
+   round1.children('div[data-teamNum="' + (i + 1) + '"]').text(n);
+   // $('div[data-teamNum="' + (i + 1) + '"]').text(n);
+ });
+}
+
+$('.footer').on('click',function(){
+  teams = [];
+  reseeded = [];
+  tournamentName = $("input[name='tournamentName']").val()
+  number = $("#tournamentSelect").val();
+
+  var empty = false;
+  for (var i = 1; i <= number; i++) {
+    if ($("#team" + i).val().trim() === "") {
+      empty = true;
+    }
+  }
+
+  if ($("input[name='tournamentName']").val().trim() === "" || empty) {
+    alert("Not Everything Filled");
+  }
+  else {
+    console.log("Tournament Name: " + tournamentName);
+    for (var i = 1; i <= number; i++) {
+      teams.push($("#team" + i).val().trim())
+      $("#team" + i).val("");
+    }
+
+    $("input[name='tournamentName']").val("");
+    seeding(number);
+  }
+
+  $(".bracketContainer").empty();
+  var teamAmount = $('select[name="tournamentSel"]').val();
+  teamAmount = parseInt(teamAmount);
+  //switch for amount of teams
+  var columnCount = 0;
+  switch(teamAmount){
+    case 4:
+      columnCount = 3;
+      break;
+    case 8:
+      columnCount = 4;
+      break;
+    case 16:
+      columnCount = 5;
+      break;
+    case 32:
+      columnCount = 6;
+      break;
+    case 64:
+      columnCount = 7;
+      break;
+    default:
+      console.log('default');
+  }
+
+  // console.log(teamAmount);
+
+  var divWidth = 100 / columnCount;
+
+  if( !$.trim( $('.bracketContainer').html() ).length ){
+    // console.log("----------------------");
+    for(var i = 0; i < columnCount; i++){
+      var newDiv = $('<div>');
+      newDiv.width(divWidth + "%");
+      newDiv.height(windowHeight + "px");
+
+      console.log(i+1);
+      // newDiv.data("roundNum", i + 1);
+      newDiv.attr("data-roundNum", i + 1);
+      // console.log("assigned roundnum is : " + newDiv.data("roundnum"));
+
+      if(i % 2 == 0){
+        newDiv.css("background-color","#264653");
+      }else{
+        newDiv.css("background-color","#2A9D8F");
       }
+      newDiv.css("float","left");
+      newDiv.attr("class","animated fadeInLeft");
 
-      // console.log(teamAmount);
+      //make subdivs for every div created here (if i > 0, amount of subdivs = teamAmount / 2^i ) do math.ciel check because last column will be decimal
+      let temp = 1;
+      
+      var subDivs = 0;
+      if(i < columnCount - 1){
+        subDivs = Math.ceil((teamAmount / Math.pow(2,i)) / 2);
 
-      var divWidth = 100 / columnCount;
+        for(var n = 0; n < subDivs;n++){
+          var sub = $('<div>');
+          sub.height(100/subDivs + "%");
+          // sub.data("matchNum", n + 1);
+          sub.attr("data-matchNum", i + 1);
+          // console.log("Assigned match num is: " + sub.data("matchNum"));
+          sub.css("border","2px solid #62BBC1");
 
-      if( !$.trim( $('.bracketContainer').html() ).length ){
-        // console.log("----------------------");
-        for(var i = 0; i < columnCount; i++){
-          var newDiv = $('<div>');
-          newDiv.width(divWidth + "%");
-          newDiv.height(windowHeight + "px");
-
-          console.log(i+1);
-          // newDiv.data("roundNum", i + 1);
-          newDiv.attr("data-roundNum", i + 1);
-          // console.log("assigned roundnum is : " + newDiv.data("roundnum"));
-
-          if(i % 2 == 0){
-            newDiv.css("background-color","#264653");
-          }else{
-            newDiv.css("background-color","#2A9D8F");
-          }
-          newDiv.css("float","left");
-          newDiv.attr("class","animated fadeInLeft");
-
-          //make subdivs for every div created here (if i > 0, amount of subdivs = teamAmount / 2^i ) do math.ciel check because last column will be decimal
-          let temp = 1;
           
-          var subDivs = 0;
-          if(i < columnCount - 1){
-            subDivs = Math.ceil((teamAmount / Math.pow(2,i)) / 2);
 
-            for(var n = 0; n < subDivs;n++){
-              var sub = $('<div>');
-              sub.height(100/subDivs + "%");
-              // sub.data("matchNum", n + 1);
-              sub.attr("data-matchNum", i + 1);
-              // console.log("Assigned match num is: " + sub.data("matchNum"));
-              sub.css("border","2px solid #62BBC1");
+          for(var k = 0; k < 2; k++){
 
-              
-
-              for(var k = 0; k < 2; k++){
-
-                var matchSplitter = $("<div>");
-                sub.append(matchSplitter);
-                // sub.data("teamNum", temp);
-                matchSplitter.attr("data-roundNum", temp);
-                // console.log("assigned team num : " + sub.data("teamNum"));
-                temp ++;
-                matchSplitter.height("50%");
-                if(k % 2 == 0){
-                  matchSplitter.css("border-bottom","2px solid #62BBC1");
-                }else{
-                  matchSplitter.css("border-top","2px solid #62BBC1");
-                }
-              }
-
-              $(newDiv).append(sub);
+            var matchSplitter = $("<div>");
+            sub.append(matchSplitter);
+            // sub.data("teamNum", temp);
+            matchSplitter.attr("data-teamNum", temp);
+            // console.log("assigned team num : " + sub.data("teamNum"));
+            temp ++;
+            matchSplitter.height("50%");
+            if(k % 2 == 0){
+              matchSplitter.css("border-bottom","2px solid #62BBC1");
+            }else{
+              matchSplitter.css("border-top","2px solid #62BBC1");
             }
-
-          }else{
-            newDiv.css("border","2px solid #62BBC1");
           }
 
-          // console.log(subDivs); //correct                 
-
-
-
-
-
-          $('.bracketContainer').append(newDiv);
+          $(newDiv).append(sub);
         }
 
       }else{
-        console.log("nope");
+        newDiv.css("border","2px solid #62BBC1");
       }
 
-    });
+      // console.log(subDivs); //correct                 
 
-    //reset functionality
-    $('.reset').on("click",function(){
-      $('.bracketContainer').empty();
-      addFields();
-    });
-    //empty bracketContainer pretty much
+
+
+
+
+      $('.bracketContainer').append(newDiv);
+    }
+
+  }else{
+    console.log("nope");
+  }
+teamWrite(reseeded);
+});
+
+//reset functionality
+$('.reset').on("click",function(){
+  $('.bracketContainer').empty();
+  addFields();
+});
+//empty bracketContainer pretty much
 
 addFields();
 
@@ -144,5 +179,49 @@ function addFields() {
     input.attr("id", "team" + i);
     line.append(input);
     $(".bracketContainer").append(line);
+  }
+}
+
+function seeding(numPlayers) {
+  var rounds = Math.log(numPlayers)/Math.log(2)-1;
+  var pls = [1,2];
+  for (var i = 0; i < rounds; i++) {
+    pls = nextLayer(pls);
+  }
+  for (var i = 0, j = 1; i < pls.length; i+=2, j++) {
+    console.log("Match " + j + ": " + teams[(pls[i]-1)] + " vs " + teams[(pls[i+1]-1)]);
+    reseeded.push(teams[(pls[i]-1)]);
+    reseeded.push(teams[(pls[i+1]-1)]);
+    var newMatch = {
+      team1: teams[(pls[i]-1)],
+      team2: teams[(pls[i+1]-1)],
+      matchNum: j,
+      roundNum: 1,
+      tournament: tournamentName
+    }
+    $.post("/api/games", newMatch); 
+  }
+  for (var k = 1; pls.length/Math.pow(2,k) !== 1; k++) {
+    for(var i = 1, j = 1; i < pls.length/Math.pow(2,k); i+=2, j++) {
+    console.log("Round " + (k+1) + " - Match " + j + ": " + "Round " + k + " Match "+ i + " Winner" + " vs " + "Round " + k + " Match "+ (i+1) + " Winner");
+    var newMatch = {
+      team1: "Round " + k + " Match " + i + " Winner",
+      team2: "Round " + k + " Match " + (i+1) + " Winner",
+      matchNum: j,
+      roundNum: (k+1),
+      tournament: tournamentName
+    }
+    $.post("/api/games", newMatch);
+  }
+  }
+  return pls;
+  function nextLayer(pls) {
+    var out=[];
+    var length = pls.length*2+1;
+    pls.forEach(function(d) {
+      out.push(d);
+      out.push(length-d);
+    });
+    return out;
   }
 }
