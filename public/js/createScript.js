@@ -72,6 +72,7 @@
                 var matchSplitter = $("<div>");
                 sub.append(matchSplitter);
                 matchSplitter.height("50%");
+                // matchSplitte
                 if(k % 2 == 0){
                   matchSplitter.css("border-bottom","2px solid #62BBC1");
                 }else{
