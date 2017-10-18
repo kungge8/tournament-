@@ -122,6 +122,23 @@ $('.footer').on('click',function(){
 
           for(var k = 0; k < 2; k++){
 
+//          //QUICK LIGHT THE CHRISMAN SIGNAL 
+
+//        _==/          i     i          \==_
+//      /XX/            |\___/|            \XX\
+//    /XXXX\            |XXXXX|            /XXXX\
+//   |XXXXXX\_         _XXXXXXX_         _/XXXXXX|
+//  XXXXXXXXXXXxxxxxxxXXXXXXXXXXXxxxxxxxXXXXXXXXXXX
+// |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+// |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+//  XXXXXX/^^^^"\XXXXXXXXXXXXXXXXXXXXX/^^^^^\XXXXXX
+//   |XXX|       \XXX/^^\XXXXX/^^\XXX/       |XXX|
+//     \XX\       \X/    \XXX/    \X/       /XX/
+//        "\       "      \X/      "      /"
+            // MATCH SPLITTERS NEED STYLING ON TEXT DISPLAYED WITHIN THEM, possibly can be done in the same place column bg color is decided?
+            // SAME THING NEEDS TO BE APPLIED TO SEARCHSCRIPT
+
             var matchSplitter = $("<div>");
             sub.append(matchSplitter);
             // sub.data("teamNum", temp);
@@ -184,6 +201,23 @@ $("#tournamentSelect").on("change", function() {
 })
 
 function addFields() {
+
+  // THESE NEED STYLING SEND HELP WEE WOO WEE WOO WEE WOO
+//         //QUICK LIGHT THE CHRISMAN SIGNAL 
+
+//        _==/          i     i          \==_
+//      /XX/            |\___/|            \XX\
+//    /XXXX\            |XXXXX|            /XXXX\
+//   |XXXXXX\_         _XXXXXXX_         _/XXXXXX|
+//  XXXXXXXXXXXxxxxxxxXXXXXXXXXXXxxxxxxxXXXXXXXXXXX
+// |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+// |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+//  XXXXXX/^^^^"\XXXXXXXXXXXXXXXXXXXXX/^^^^^\XXXXXX
+//   |XXX|       \XXX/^^\XXXXX/^^\XXX/       |XXX|
+//     \XX\       \X/    \XXX/    \X/       /XX/
+//        "\       "      \X/      "      /"
+
   var number = $("#tournamentSelect").val();
   
   $(".bracketContainer").empty();
