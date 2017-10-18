@@ -14,6 +14,7 @@
     $('.sidebar-inner').height(windowHeight + "px");
 
     $('.footer').on('click',function(){
+      $(".bracketContainer").empty();
       var teamAmount = $('select[name="tournamentSel"]').val();
       teamAmount = parseInt(teamAmount);
       //switch for amount of teams
@@ -50,8 +51,8 @@
           newDiv.height(windowHeight + "px");
 
           console.log(i+1);
-          newDiv.data("roundNum", i + 1);
-          // newDiv.attr("data-roundNum", i + 1);
+          // newDiv.data("roundNum", i + 1);
+          newDiv.attr("data-roundNum", i + 1);
           // console.log("assigned roundnum is : " + newDiv.data("roundnum"));
 
           if(i % 2 == 0){
@@ -72,7 +73,8 @@
             for(var n = 0; n < subDivs;n++){
               var sub = $('<div>');
               sub.height(100/subDivs + "%");
-              sub.data("matchNum", n + 1);
+              // sub.data("matchNum", n + 1);
+              sub.attr("data-matchNum", i + 1);
               // console.log("Assigned match num is: " + sub.data("matchNum"));
               sub.css("border","2px solid #62BBC1");
 
@@ -82,8 +84,9 @@
 
                 var matchSplitter = $("<div>");
                 sub.append(matchSplitter);
-                sub.data("teamNum", temp);
-                console.log("assigned team num : " + sub.data("teamNum"));
+                // sub.data("teamNum", temp);
+                matchSplitter.attr("data-roundNum", temp);
+                // console.log("assigned team num : " + sub.data("teamNum"));
                 temp ++;
                 matchSplitter.height("50%");
                 if(k % 2 == 0){
@@ -118,5 +121,28 @@
     //reset functionality
     $('.reset').on("click",function(){
       $('.bracketContainer').empty();
+      addFields();
     });
     //empty bracketContainer pretty much
+
+addFields();
+
+$("#tournamentSelect").on("change", function() {
+  addFields();
+})
+
+function addFields() {
+  var number = $("#tournamentSelect").val();
+  
+  $(".bracketContainer").empty();
+  for (var i = 1; i <= number; i++) {
+    var line = $("<div>");
+    line.attr("class", "inputLine");
+    line.append("Team " + i + " ");
+    var input = $("<input>");
+    input.attr("type", "text");
+    input.attr("id", "team" + i);
+    line.append(input);
+    $(".bracketContainer").append(line);
+  }
+}
