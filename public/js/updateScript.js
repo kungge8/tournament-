@@ -38,6 +38,9 @@ function upScInit(){
 	$('#label3').text("Winning Team");
 	$('#tournamentSelect').html('<option>1</otion><option>2</otion>');
 
+	$("#tournamentSelect").off();
+	$('.reset').off();
+	$('.reset').hide();
 	$(".footer").off();
 	$(".footer").on("click", updateMatch);
 }
