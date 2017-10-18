@@ -63,7 +63,8 @@
           newDiv.attr("class","animated fadeInLeft");
 
           //make subdivs for every div created here (if i > 0, amount of subdivs = teamAmount / 2^i ) do math.ciel check because last column will be decimal
-
+          let temp = 1;
+          
           var subDivs = 0;
           if(i < columnCount - 1){
             subDivs = Math.ceil((teamAmount / Math.pow(2,i)) / 2);
@@ -75,10 +76,15 @@
               // console.log("Assigned match num is: " + sub.data("matchNum"));
               sub.css("border","2px solid #62BBC1");
 
+              
+
               for(var k = 0; k < 2; k++){
 
                 var matchSplitter = $("<div>");
                 sub.append(matchSplitter);
+                sub.data("teamNum", temp);
+                console.log("assigned team num : " + sub.data("teamNum"));
+                temp ++;
                 matchSplitter.height("50%");
                 if(k % 2 == 0){
                   matchSplitter.css("border-bottom","2px solid #62BBC1");
