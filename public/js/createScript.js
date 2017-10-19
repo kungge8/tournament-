@@ -22,7 +22,9 @@ function teamWrite(arr, roundNum){
  let round1 = $('div[data-roundNum="' + roundNum + '"]').children();
  console.log(round1);
  arr.map(function (n, i) {
-   round1.children('div[data-teamNum="' + (i + 1) + '"]').text(n);
+  var textElement = $("<div class='subText'>");
+  textElement.text(n);
+   round1.children('div[data-teamNum="' + (i + 1) + '"]').append(textElement);
    // $('div[data-teamNum="' + (i + 1) + '"]').text(n);
  });
 }
@@ -122,7 +124,7 @@ $('.footer').on('click',function(){
 
           for(var k = 0; k < 2; k++){
 
-            var matchSplitter = $("<div>");
+            var matchSplitter = $("<div class='match'>");
             sub.append(matchSplitter);
             // sub.data("teamNum", temp);
             matchSplitter.attr("data-teamNum", temp);
@@ -140,12 +142,12 @@ $('.footer').on('click',function(){
         }
 
       }else if (i === columnCount - 1){
-        var sub = $('<div>');
-        sub.height(100/subDivs + "%");
+        var sub = $("<div>");
+        sub.height(100/1 + "%");
         sub.attr("data-matchNum", 1);
         // sub.css("border","2px solid #62BBC1");
 
-        var matchSplitter = $("<div>");
+        var matchSplitter = $("<div class='match' id='champion'>");
         matchSplitter.attr("data-teamNum", 1);
 
         sub.append(matchSplitter);
@@ -189,9 +191,9 @@ function addFields() {
   $(".bracketContainer").empty();
   for (var i = 1; i <= number; i++) {
     var line = $("<div>");
-    line.attr("class", "inputLine");
+    line.attr("class", "matchSplitter");
     line.append("Team " + i + " ");
-    var input = $("<input>");
+    var input = $("<input class='line'>");
     input.attr("type", "text");
     input.attr("id", "team" + i);
     line.append(input);

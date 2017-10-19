@@ -146,3 +146,35 @@ body{
 div{
   -webkit-backface-visibility: hidden;
 }
+
+.matchSplitter{
+ text-align: center;
+ color: #FFFBFA ;
+ padding: 2px;
+ width: 300px;
+ margin: 0 auto;
+}
+
+.line{
+ width: 200px;
+ margin-bottom: 5px;
+ /*margin: 0 auto;*/
+ border: 2px solid #2A9D8F ;
+ box-shadow: 1px 1px 10px #111;
+ -webkit-backface-visibility: hidden;
+}
+
+.match{
+  text-align: center;
+  color: #FFFBFA;
+}
+
+.subText{
+  position: relative;
+  top: 50%;
+}
+
+#champion {
+  height: 100%;
+  border: 2px solid #62BBC1;
+}
