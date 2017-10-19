@@ -2,6 +2,8 @@ var express = require("express");
 var exphbs = require("express-handlebars");
 var path = require("path");
 var bodyParser = require("body-parser");
+var passport = require("./config/passport");
+var session = require("express-session");
 
 var app = express();
 var PORT = process.env.PORT || 8080;
@@ -18,6 +20,10 @@ app.engine('handlebars',exphbs({defaultLayout: 'main'}));
 app.set('view engine','handlebars');
 
 app.use(express.static(path.join(__dirname,'public')));
+
+app.use(session({ secret: "smash", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 var homeScripts = [{script: 'js/homeScript.js'}];
 app.get("/",function(req,res){

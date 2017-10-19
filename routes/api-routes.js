@@ -1,4 +1,5 @@
 var db = require("../models");
+var passport = require("../config/passport");
 
 module.exports = function(app) {
   app.post("/api/games", function(req, res) {
@@ -55,4 +56,36 @@ module.exports = function(app) {
       })
     }
   });
+
+
+
+  app.post("/api/signup", function(req, res) {
+    console.log(req.body);
+    db.User.create({
+      userName: req.body.userName,
+      passWord: req.body.passWord
+    }).then(function() {
+      res.redirect(307, "/api/login");
+    }).catch(function(err) {
+      console.log(err);
+      res.json(err);
+      // res.status(422).json(err.errors[0].message);
+    });
+  });
+
+
+
+  app.post("/api/login", passport.authenticate("local"), function(req, res) {
+
+    res.json("/create");
+  });
+
+
+
+
+
+
+
+
+
 };
