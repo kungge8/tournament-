@@ -6,7 +6,10 @@ create table tournaments(
 
     tournament_id integer(5) not null auto_increment,
     tournament_name varchar(20) not null,
+<<<<<<< HEAD
     tournament_info varchar(240),
+=======
+>>>>>>> cbranch
     primary key(tournament_id)
 
 );
@@ -37,10 +40,17 @@ create table teams(
     team_name varchar(20) not null,
     tournament_id integer(5) not null,
     match_id integer(5) not null,
+<<<<<<< HEAD
     team_info varchar(240),
+=======
+>>>>>>> cbranch
     foreign key(tournament_id) references tournaments(tournament_id),
     foreign key(match_id) references matches(match_id),
     primary key(team_id)
 
+<<<<<<< HEAD
 );
 
+=======
+);
+>>>>>>> cbranch
