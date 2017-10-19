@@ -54,7 +54,6 @@ $('.footer').on('click',function(){
 
     $("input[name='tournamentName']").val("");
     seeding(number);
-  }
 
   $(".bracketContainer").empty();
   var teamAmount = $('select[name="tournamentSel"]').val();
@@ -167,8 +166,9 @@ $('.footer').on('click',function(){
   }else{
     console.log("nope");
   }
-  teamWrite(reseeded, 1);
-  upScInit();
+    teamWrite(reseeded, 1);
+    upScInit();
+  }
 });
 
 //reset functionality
