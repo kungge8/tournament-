@@ -1,21 +1,20 @@
 $(document).ready(function() {
 
-
-
-
 	$("#loginButton").on("click",function(){
 		var username = $("#user").val().trim();
 		var password = $("#pass").val().trim();
 	 	loginUser(username, password);
-
 	});
 
 	$("#userButton").on("click",function(){
 
 		var username = $("#user").val().trim();
 		var password = $("#pass").val().trim();
-
-		signUpUser(username, password);
+		if (username === "" || password === ""){
+			alert("Please enter a unique Username and Password")
+		}else {
+			signUpUser(username, password);
+	};
 
    		$("#user").val("");
    		$("#pass").val("");
@@ -25,13 +24,17 @@ $(document).ready(function() {
 		window.location = "/create";
 	});
 
+	$("#homeButton").on("click",function(){
+		window.location = "/";
+	});
+
 
 	function loginUser(username, password) {
 	    $.post("/api/login", {
-	      userName: username,
-	      passWord: password
+	      username: username,
+	      password: password
 	    }).then(function(data) {
-	    	window.location = "/create";
+	    	window.location.replace(data);
 	    }).catch(function(err) {
 	      console.log(err);
 	    });
@@ -39,8 +42,8 @@ $(document).ready(function() {
 
 	function signUpUser(username, password) {
 		$.post("/api/signup", {
-		  userName: username,
-		  passWord: password
+		  username: username,
+		  password: password
 		}).then(function(data) {
 			alert("Account Created!")
 		}).catch(handleLoginErr);
