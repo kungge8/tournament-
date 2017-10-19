@@ -76,21 +76,7 @@ $(".footer").on("click", function (){
             
 
             for(var k = 0; k < 2; k++){
-
-  // THESE NEED STYLING SEND HELP WEE WOO WEE WOO WEE WOO
-//         //QUICK LIGHT THE CHRISMAN SIGNAL 
-
-//     _______   .---.  .---. .-------.   .-./`)    .-'''-.  
-//    /   __  \  |   |  |_ _| |  _ _   \  \ .-.')  / _     \ 
-//   | ,_/  \__) |   |  ( ' ) | ( ' )  |  / `-' \ (`' )/`--' 
-// ,-./  )       |   '-(_{;}_)|(_ o _) /   `-'`"`(_ o _).    
-// \  '_ '`)     |      (_,_) | (_,_).' __ .---.  (_,_). '.  
-//  > (_)  )  __ | _ _--.   | |  |\ \  |  ||   | .---.  \  : 
-// (  .  .-'_/  )|( ' ) |   | |  | \ `'   /|   | \    `-'  | 
-//  `-'`-'     / (_{;}_)|   | |  |  \    / |   |  \       /  
-//    `._____.'  '(_,_) '---' ''-'   `'-'  '---'   `-...-'   
-
-              var matchSplitter = $("<div>");
+              var matchSplitter = $("<div class='match'>");
               sub.append(matchSplitter);
               // sub.data("teamNum", temp);
               matchSplitter.attr("data-teamNum", temp);
@@ -109,11 +95,11 @@ $(".footer").on("click", function (){
 
         }else if (i === columnCount - 1){
           var sub = $('<div>');
-          sub.height(100/subDivs + "%");
+          sub.height(100/1 + "%");
           sub.attr("data-matchNum", 1);
           // sub.css("border","2px solid #62BBC1");
 
-          var matchSplitter = $("<div>");
+          var matchSplitter = $("<div class='match' id='champion'>");
           matchSplitter.attr("data-teamNum", 1);
 
           sub.append(matchSplitter);
@@ -136,8 +122,8 @@ $(".footer").on("click", function (){
     }
 
     for (var i = 0; i < result.length; i++) {
-      $('div[data-roundNum="' + result[i].roundNum + '"]').children('div[data-matchNum="' + result[i].matchNum + '"]').children().eq(0).text(result[i].team1);
-      $('div[data-roundNum="' + result[i].roundNum + '"]').children('div[data-matchNum="' + result[i].matchNum + '"]').children().eq(1).text(result[i].team2);
+      $('div[data-roundNum="' + result[i].roundNum + '"]').children('div[data-matchNum="' + result[i].matchNum + '"]').children().eq(0).html("<div class='subText'>" + result[i].team1 + "</div>");
+      $('div[data-roundNum="' + result[i].roundNum + '"]').children('div[data-matchNum="' + result[i].matchNum + '"]').children().eq(1).html("<div class='subText'>" + result[i].team2 + "</div>");
     }
 
 	});
